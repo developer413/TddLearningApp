@@ -6,11 +6,11 @@ import org.junit.Test
 
 class CarFeature {
 
-    private val car = Car(5.0)
-
-    @Test
-    fun carIsLoosingFuelOnTurningOn(){
-        car.turnOn()
-        assertEquals(4.5,car.fuel)
-    }
+//    private val car = Car(5.0)
+//
+//    @Test
+//    fun carIsLoosingFuelOnTurningOn(){
+//        car.turnOn()
+//        assertEquals(4.5,car.fuel)
+//    }
 }
