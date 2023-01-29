@@ -1,5 +1,7 @@
 package com.p413.tddlearning
 
+import kotlinx.coroutines.delay
+
 class Engine(
     var cc: Int = 1200,
     var horsePower: Int = 88,
@@ -7,8 +9,9 @@ class Engine(
     var isTurnedOn: Boolean = false
 ) {
 
-    fun turnOn() {
+    suspend fun turnOn() {
         isTurnedOn = true
+        delay(6000)
         temperature = 95
     }
 
