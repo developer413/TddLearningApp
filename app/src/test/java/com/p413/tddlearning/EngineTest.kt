@@ -1,6 +1,8 @@
 package com.p413.tddlearning
 
 import com.p413.tddlearning.utils.MainCoroutineScopeRule
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Rule
@@ -15,11 +17,12 @@ class EngineTest {
 
 
     @Test
-    fun turnOn() = runBlocking {
-        engine.turnOn()
+    fun turnOnEngineGradually() = runBlocking {
+        val temp: Flow<Int> = engine.turnOn()
+        val tempList: List<Int> = temp.toList()
 
         assertEquals(true, engine.isTurnedOn)
-        assertEquals(95, engine.temperature)
+        assertEquals(listOf(25, 50, 95), tempList)
     }
 
     @Test
