@@ -3,8 +3,8 @@ package com.p413.tddlearning.unittest
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
-import com.p413.tddlearning.Car
-import com.p413.tddlearning.Engine
+import com.p413.tddlearning.sample.Car
+import com.p413.tddlearning.sample.Engine
 import com.p413.tddlearning.utils.MainCoroutineScopeRule
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.runBlocking

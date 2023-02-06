@@ -1,10 +1,9 @@
 package com.p413.tddlearning.integrationtest
 
-import com.p413.tddlearning.Car
-import com.p413.tddlearning.Engine
+import com.p413.tddlearning.sample.Car
+import com.p413.tddlearning.sample.Engine
 import com.p413.tddlearning.utils.MainCoroutineScopeRule
 import junit.framework.TestCase.assertEquals
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.advanceTimeBy
 import org.junit.Rule

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TddLearning</string>
+    <string name="playlists_screen_tile">Playlists</string>
 </resources>

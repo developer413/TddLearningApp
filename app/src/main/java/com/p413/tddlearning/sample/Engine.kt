@@ -1,4 +1,4 @@
-package com.p413.tddlearning
+package com.p413.tddlearning.sample
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
