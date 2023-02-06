@@ -13,7 +13,8 @@
         android:theme="@style/Theme.TddLearning"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".groovy.MainActivity"
+            android:label="@string/playlists_screen_tile"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
