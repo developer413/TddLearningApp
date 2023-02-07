@@ -1,4 +1,4 @@
-package com.p413.tddlearning.unittest
+package com.p413.tddlearning.sample.unittest
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times

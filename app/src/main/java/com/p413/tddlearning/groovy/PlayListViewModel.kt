@@ -1,10 +1,12 @@
 package com.p413.tddlearning.groovy
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 
-class PlayListViewModel : ViewModel() {
+class PlayListViewModel(private val repository: PlayListRepository) : ViewModel() {
 
-    val playList = MutableLiveData<Result<List<PlayList>>>()
+
+    val playList = liveData {
+        emitSource(repository.getPlaylists().asLiveData())
+    }
 
 }

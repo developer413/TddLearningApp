@@ -1,6 +1,5 @@
-package com.p413.tddlearning
+package com.p413.tddlearning.sample
 
-import com.p413.tddlearning.sample.Engine
 import com.p413.tddlearning.utils.MainCoroutineScopeRule
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.toList
