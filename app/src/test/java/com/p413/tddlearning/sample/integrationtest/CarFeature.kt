@@ -1,4 +1,4 @@
-package com.p413.tddlearning.integrationtest
+package com.p413.tddlearning.sample.integrationtest
 
 import com.p413.tddlearning.sample.Car
 import com.p413.tddlearning.sample.Engine
