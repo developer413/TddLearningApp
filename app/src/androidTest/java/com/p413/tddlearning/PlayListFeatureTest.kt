@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class PlayListScreenTest {
+class PlayListFeatureTest {
 
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
         @Rule get

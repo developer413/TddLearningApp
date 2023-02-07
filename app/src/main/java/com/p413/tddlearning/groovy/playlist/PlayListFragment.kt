@@ -1,4 +1,4 @@
-package com.p413.tddlearning.groovy
+package com.p413.tddlearning.groovy.playlist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,8 +16,8 @@ class PlayListFragment : Fragment() {
 
     lateinit var viewModel: PlayListViewModel
     lateinit var viewModelFactory: PlayListViewModelFactory
-    private val repository = PlayListRepository()
-
+    private val service = PlayListService()
+    private val repository = PlayListRepository(service)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,9 +28,9 @@ class PlayListFragment : Fragment() {
         setUpViewModel()
 
         viewModel.playList.observe(this as LifecycleOwner) { playLists ->
-            if(playLists.getOrNull()!=null){
+            if (playLists.getOrNull() != null) {
                 setUpRecyclerView(view, playLists.getOrNull()!!)
-            }else{
+            } else {
                 // TODO error handling
             }
         }
