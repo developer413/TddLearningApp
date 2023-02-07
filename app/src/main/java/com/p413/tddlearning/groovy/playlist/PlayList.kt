@@ -1,4 +1,4 @@
-package com.p413.tddlearning.groovy
+package com.p413.tddlearning.groovy.playlist
 
 import com.p413.tddlearning.R
 
