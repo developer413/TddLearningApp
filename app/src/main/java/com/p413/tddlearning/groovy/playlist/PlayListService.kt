@@ -1,10 +1,16 @@
 package com.p413.tddlearning.groovy.playlist
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 
-class PlayListService {
+class PlayListService(private val playListApi: PlayListApi) {
 
     suspend fun fetchPlayList(): Flow<Result<List<PlayList>>> {
-        TODO("need to implement")
+        return flow {
+            emit(Result.success(playListApi.fetchAllPlayLists()))
+        }.catch {
+            emit(Result.failure(RuntimeException("Something went wrong")))
+        }
     }
 }
