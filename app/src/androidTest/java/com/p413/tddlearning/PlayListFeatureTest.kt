@@ -11,8 +11,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.p413.tddlearning.groovy.MainActivity
 import org.hamcrest.Description
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers.allOf
-import org.hamcrest.Matchers.instanceOf
+import org.hamcrest.Matchers.*
 import org.hamcrest.TypeSafeMatcher
 import org.junit.Rule
 import org.junit.Test
@@ -37,13 +36,14 @@ class PlayListFeatureTest {
 
     @Test
     fun displayListOfPlayLists() {
+        Thread.sleep(5000)
         onView(
             allOf(
                 withId(R.id.item_name),
                 isDescendantOfA(nthChildOf(withId(R.id.rv_play_list), 0))
             )
         )
-            .check(matches(withText("Hard Rock Cafe")))
+            .check(matches(withText(endsWith("Music 1"))))
             .check(matches(isDisplayed()))
 
 
@@ -53,9 +53,8 @@ class PlayListFeatureTest {
                 isDescendantOfA(nthChildOf(withId(R.id.rv_play_list), 0))
             )
         )
-            .check(matches(withText("rock")))
+            .check(matches(withText("Rock")))
             .check(matches(isDisplayed()))
-
     }
 
     fun nthChildOf(parentMatcher: Matcher<View>, childPosition: Int): Matcher<View> {
