@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.p413.tddlearning.R
 import com.p413.tddlearning.databinding.PlaylistItemBinding
-
 
 
 class MyPlayListRecyclerViewAdapter(
@@ -27,9 +27,9 @@ class MyPlayListRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.playListName.text = item.id
-        holder.playlistCategory.text = item.name
-        holder.playListImage.setImageResource(item.image)
+        holder.playListName.text = item.name
+        holder.playlistCategory.text = item.category
+        holder.playListImage.setImageResource(R.mipmap.playlist)
     }
 
     override fun getItemCount(): Int = values.size

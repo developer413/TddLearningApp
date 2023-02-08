@@ -10,14 +10,26 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.p413.tddlearning.R
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class PlayListFragment : Fragment() {
 
     lateinit var viewModel: PlayListViewModel
     lateinit var viewModelFactory: PlayListViewModelFactory
-    private val service = PlayListService(object : PlayListApi {})
+    private val retrofit =
+        Retrofit.Builder()
+            .baseUrl("https://63e32ccfc919fe386c01baef.mockapi.io/")
+            .client(OkHttpClient())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+    private val api = retrofit.create(PlayListApi::class.java)
+    private val service = PlayListService(api)
     private val repository = PlayListRepository(service)
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

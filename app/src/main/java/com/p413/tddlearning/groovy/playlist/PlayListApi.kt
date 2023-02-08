@@ -1,8 +1,9 @@
 package com.p413.tddlearning.groovy.playlist
 
+import retrofit2.http.GET
+
 interface PlayListApi {
 
-    suspend fun fetchAllPlayLists(): List<PlayList> {
-        TODO("To be implemented")
-    }
+    @GET("playlist")
+    suspend fun fetchAllPlayLists(): List<PlayList>
 }
