@@ -72,6 +72,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
 //    androidTestImplementation('com.schibsted.spain:barista:4.2.0') {
 //        exclude group: 'org.jetbrains.kotlin' // Only if you already use Kotlin in your project
 //    }

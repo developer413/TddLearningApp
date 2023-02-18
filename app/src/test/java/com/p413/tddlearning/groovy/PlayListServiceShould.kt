@@ -4,8 +4,8 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import com.p413.tddlearning.groovy.playlist.PlayList
 import com.p413.tddlearning.groovy.playlist.PlayListApi
+import com.p413.tddlearning.groovy.playlist.PlayListRaw
 import com.p413.tddlearning.groovy.playlist.PlayListService
 import com.p413.tddlearning.utils.BaseUnitTest
 import kotlinx.coroutines.flow.first
@@ -18,7 +18,7 @@ class PlayListServiceShould : BaseUnitTest() {
     private val playListApi: PlayListApi = mock()
 
     private lateinit var service: PlayListService
-    private val playLists: List<PlayList> = mock()
+    private val playLists: List<PlayListRaw> = mock()
 
     @Test
     fun shouldFetchPlayListFromApi(): Unit = runBlocking {
