@@ -3,23 +3,21 @@ package com.p413.tddlearning.groovy.playlist
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import com.p413.tddlearning.R
+import com.p413.tddlearning.databinding.FragmentPlaylistBinding
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class PlayListFragment : Fragment() {
 
-    lateinit var viewModel: PlayListViewModel
+    private lateinit var playlistBinding: FragmentPlaylistBinding
+
+    private lateinit var viewModel: PlayListViewModel
 
     @Inject
     lateinit var viewModelFactory: PlayListViewModelFactory
@@ -28,34 +26,34 @@ class PlayListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_playlist, container, false)
+    ): View {
+        playlistBinding = FragmentPlaylistBinding.inflate(inflater, container, false)
 
         setUpViewModel()
 
+        return playlistBinding.root
+    }
+
+    private fun setUpRecyclerView(
+        playLists: List<PlayList>
+    ) {
+        playlistBinding.rvPlayList.layoutManager = LinearLayoutManager(context)
+        playlistBinding.rvPlayList.adapter = MyPlayListRecyclerViewAdapter(playLists)
+    }
+
+    private fun setUpViewModel() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[PlayListViewModel::class.java]
         viewModel.playList.observe(this as LifecycleOwner) { playLists ->
             if (playLists.getOrNull() != null) {
-                setUpRecyclerView(view, playLists.getOrNull()!!)
+                setUpRecyclerView(playLists.getOrNull()!!)
             } else {
                 // TODO error handling
             }
         }
 
-        return view
-    }
-
-    private fun setUpRecyclerView(
-        view: View?,
-        playLists: List<PlayList>
-    ) {
-        with(view as RecyclerView) {
-            layoutManager = LinearLayoutManager(context)
-            adapter = MyPlayListRecyclerViewAdapter(playLists)
+        viewModel.loader.observe(viewLifecycleOwner) {
+            playlistBinding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
         }
-    }
-
-    private fun setUpViewModel() {
-        viewModel = ViewModelProvider(this, viewModelFactory)[PlayListViewModel::class.java]
     }
 
     companion object {

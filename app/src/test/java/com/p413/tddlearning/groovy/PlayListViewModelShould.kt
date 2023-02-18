@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import petros.efthymiou.groovy.utils.captureValues
 import petros.efthymiou.groovy.utils.getValueForTest
 
 
@@ -40,6 +41,55 @@ class PlayListViewModelShould : BaseUnitTest() {
 
     @Test
     fun emitError(): Unit = runBlocking {
+        val viewModel = errorCase()
+
+        assertEquals(exception, viewModel.playList.getValueForTest()!!.exceptionOrNull())
+    }
+
+    @Test
+    fun showProgressBarWhileLoading(): Unit = runBlocking {
+        val viewModel = successCase()
+
+        viewModel.loader.captureValues {
+            viewModel.playList.getValueForTest()
+            assertEquals(true, values[0])
+        }
+    }
+
+
+    @Test
+    fun hideProgressBarAfterLoading(): Unit = runBlocking {
+        val viewModel = successCase()
+
+        viewModel.loader.captureValues {
+            viewModel.playList.getValueForTest()
+            assertEquals(false, values.last())
+        }
+    }
+
+    @Test
+    fun hideProgressBarWhenError(): Unit = runBlocking {
+        val viewModel = errorCase()
+
+        viewModel.loader.captureValues {
+            viewModel.playList.getValueForTest()
+            assertEquals(false, values.last())
+        }
+    }
+
+
+    private fun successCase(): PlayListViewModel {
+        runBlocking {
+            whenever(repository.getPlaylists()).thenReturn(
+                flow {
+                    emit(expected)
+                }
+            )
+        }
+        return PlayListViewModel(repository)
+    }
+
+    private fun errorCase(): PlayListViewModel {
         runBlocking {
             whenever(repository.getPlaylists()).thenReturn(
                 flow {
@@ -47,9 +97,7 @@ class PlayListViewModelShould : BaseUnitTest() {
                 }
             )
         }
-        val viewModel = PlayListViewModel(repository)
-
-        assertEquals(exception,viewModel.playList.getValueForTest()!!.exceptionOrNull())
+        return PlayListViewModel(repository)
     }
 
     private fun initializations(): PlayListViewModel {

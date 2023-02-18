@@ -11,5 +11,8 @@ class PlaylistModule {
 
     @Provides
     fun playListApi(retrofitInstance: RetrofitClientInstance): PlayListApi =
-        retrofitInstance.retrofitInstance.create(PlayListApi::class.java)
+        retrofitInstance().retrofitInstance.create(PlayListApi::class.java)
+
+    @Provides
+    fun retrofitInstance(): RetrofitClientInstance = RetrofitClientInstance
 }

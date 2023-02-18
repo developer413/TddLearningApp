@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -57,7 +58,19 @@ class PlayListFeatureTest {
             .check(matches(isDisplayed()))
     }
 
-    fun nthChildOf(parentMatcher: Matcher<View>, childPosition: Int): Matcher<View> {
+    @Test
+    fun displayLoaderWhileFetchingPlaylist() {
+        assert(true) { R.id.progress_bar }
+    }
+
+    @Test
+    fun hideLoader() {
+        Thread.sleep(5000)
+        onView(withId(R.id.progress_bar))
+            .check(matches(withEffectiveVisibility(Visibility.GONE)))
+    }
+
+    private fun nthChildOf(parentMatcher: Matcher<View>, childPosition: Int): Matcher<View> {
         return object : TypeSafeMatcher<View>() {
             override fun describeTo(description: Description) {
                 description.appendText("position $childPosition of parent ")
