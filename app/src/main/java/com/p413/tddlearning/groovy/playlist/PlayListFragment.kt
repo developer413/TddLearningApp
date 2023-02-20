@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.p413.tddlearning.databinding.FragmentPlaylistBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -38,7 +39,10 @@ class PlayListFragment : Fragment() {
         playLists: List<PlayList>
     ) {
         playlistBinding.rvPlayList.layoutManager = LinearLayoutManager(context)
-        playlistBinding.rvPlayList.adapter = MyPlayListRecyclerViewAdapter(playLists)
+        playlistBinding.rvPlayList.adapter = MyPlayListRecyclerViewAdapter(playLists) { id ->
+            val action = PlayListFragmentDirections.actionPlayListFragmentToDetailsFragment(id)
+            findNavController().navigate(action)
+        }
     }
 
     private fun setUpViewModel() {
