@@ -7,7 +7,4 @@ interface PlayListApi {
 
     @GET("playlist")
     suspend fun fetchAllPlayLists(): List<PlayListRaw>
-
-    @GET("details")
-    suspend fun fetchPlayListDetails(id: String): PlayListDetails
 }

@@ -1,6 +1,7 @@
 package com.p413.tddlearning.groovy.playlist
 
 import com.jakewharton.espresso.OkHttp3IdlingResource
+import com.p413.tddlearning.groovy.details.PlayListDetailsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,6 +18,10 @@ class PlaylistModule {
     @Provides
     fun playListApi(retrofitInstance: RetrofitClientInstance): PlayListApi =
         retrofitInstance().retrofitInstance.create(PlayListApi::class.java)
+
+    @Provides
+    fun playListDetailsApi(retrofitInstance: RetrofitClientInstance): PlayListDetailsApi =
+        retrofitInstance().retrofitInstance.create(PlayListDetailsApi::class.java)
 
     @Provides
     fun retrofitInstance(): RetrofitClientInstance = RetrofitClientInstance

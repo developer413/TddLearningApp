@@ -1,4 +1,4 @@
-package com.p413.tddlearning.groovy
+package com.p413.tddlearning.groovy.details
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
