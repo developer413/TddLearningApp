@@ -2,16 +2,13 @@ package com.p413.tddlearning
 
 import android.widget.TextView
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.adevinta.android.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
-import com.p413.tddlearning.groovy.MainActivity
+import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers.*
-import org.junit.Assert.assertEquals
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -19,13 +16,10 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class PlayListFeatureTest : BaseUiTest() {
 
-    val activityRule = ActivityScenarioRule(MainActivity::class.java)
-        @Rule get
-
     @Test
     fun displayTitleAsPlayList() {
         onView(
-            allOf(
+            CoreMatchers.allOf(
                 instanceOf(TextView::class.java),
                 withParent(withResourceName("action_bar"))
             )
@@ -35,7 +29,7 @@ class PlayListFeatureTest : BaseUiTest() {
     @Test
     fun displayListOfPlayLists() {
         onView(
-            allOf(
+            CoreMatchers.allOf(
                 withId(R.id.item_name),
                 isDescendantOfA(nthChildOf(withId(R.id.rv_play_list), 0))
             )
@@ -45,7 +39,7 @@ class PlayListFeatureTest : BaseUiTest() {
 
 
         onView(
-            allOf(
+            CoreMatchers.allOf(
                 withId(R.id.item_category),
                 isDescendantOfA(nthChildOf(withId(R.id.rv_play_list), 0))
             )
@@ -68,14 +62,15 @@ class PlayListFeatureTest : BaseUiTest() {
     @Test
     fun navigateToDetailsScreen() {
         onView(
-            allOf(
+            CoreMatchers.allOf(
                 withId(R.id.playlist_img),
                 isDescendantOfA(
                     nthChildOf(
-                        withId(R.id.rv_play_list), 0)
+                        withId(R.id.rv_play_list), 0
+                    )
                 )
             )
-        ).perform(click())
+        ).perform(ViewActions.click())
 
         assertDisplayed(R.id.playlist_details_root)
     }
